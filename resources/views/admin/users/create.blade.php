@@ -1,4 +1,9 @@
-<h1>Novo Usuário</h1>
+@extends('admin.layouts.app')
+
+@section('title', 'Criar Novo Usuário')
+
+@section('content')
+    <h1>Novo Usuário</h1>
 
 <form action="{{ route('users.store') }}" method="POST">
     @csrf()
@@ -7,3 +12,5 @@
     <input type="password" name="password" placeholder="Senha">
     <button type="submit">Enviar</button>
 </form>
+
+@endsection
