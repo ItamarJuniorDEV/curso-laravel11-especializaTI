@@ -7,7 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -56,4 +56,25 @@ class UserController extends Controller
             ->route('users.index')
             ->with('success', 'Usuário editado com sucesso');
     }
+
+    public function show(string $id)
+    {
+        if (!$user = User::find($id) ) {
+            return redirect()->route('users.index')->with('message', 'Usuário não encontrado');
+        }
+        return view('admin.users.show', compact('user'));
+    }
+
+    public function destroy(string $id)
+    {
+        if (!$user = User::find($id) ) {
+            return back()->with('message', 'Usuário não encontrado');
+        }
+        $user->delete();
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'Usuário excluído com sucesso');
+    }
 }
+        
