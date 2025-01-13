@@ -67,6 +67,11 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
+        //if (Gate::denies('is-admin')){
+        //    return back()->with('message', 'Acesso não autorizado');
+        // }
+
+
         if (!$user = User::find($id) ) {
             return back()->with('message', 'Usuário não encontrado');
         }
